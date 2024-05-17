@@ -47,8 +47,6 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 typedef unsigned long long uvlong;
 
-typedef void **allocstack;
-
 void	 sysfatal(const char *, ...);
 void	 syslog(const char *, ...);
 void	*emalloc(uint);
