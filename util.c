@@ -41,7 +41,7 @@ emalloc(uint n)
 
 	p = malloc(n);
 	if (p == NULL)
-		error("malloc");
+		sysfatal("malloc");
 	memset(p, 0, n);
 	return p;
 }
@@ -53,7 +53,7 @@ erealloc(void *q, uint n)
 
 	p = realloc(q, n);
 	if (p == NULL)
-		error("realloc");
+		sysfatal("realloc");
 	return p;
 }
 
@@ -67,12 +67,14 @@ estrtol(const char *nptr, int base)
 	n = strtol(nptr, &endptr, base);
 	if ((endptr == nptr) || ((n == LONG_MAX || n == LONG_MIN)
 	   && errno == ERANGE))
-		error("invalid integer: %s", nptr);
+		sysfatal("invalid integer: %s", nptr);
 	return n;
 }
 
 void
-setprogname(char **s, char *argv0)
+setprogname(char **progname, char *s)
 {
-	*s = argv0;
+	*progname = s;
+	if (!strncmp(s, "./", 2))
+		*progname += 2;
 }
