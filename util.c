@@ -7,7 +7,7 @@
 
 #include "util.h"
 
-char *progname = "";
+char *_progname = "";
 
 void
 sysfatal(const char *fmt, ...)
@@ -15,7 +15,7 @@ sysfatal(const char *fmt, ...)
 	va_list ap;
 
 	va_start(ap, fmt);
-	fprintf(stderr, "%s: ", progname);
+	fprintf(stderr, "%s: ", _progname);
 	vfprintf(stderr, fmt, ap);
 	va_end(ap);
 	fputc('\n', stderr);
@@ -28,7 +28,7 @@ syslog(const char *fmt, ...)
 	va_list ap;
 
 	va_start(ap, fmt);
-	fprintf(stderr, "%s: ", progname);
+	fprintf(stderr, "%s: ", _progname);
 	vfprintf(stderr, fmt, ap);
 	va_end(ap);
 	fputc('\n', stderr);
@@ -72,9 +72,9 @@ estrtol(const char *nptr, int base)
 }
 
 void
-setprogname(char **progname, char *s)
+_setprogname(char *s)
 {
-	*progname = s;
+	_progname = s;
 	if (!strncmp(s, "./", 2))
-		*progname += 2;
+		*_progname += 2;
 }

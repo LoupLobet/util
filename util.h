@@ -12,7 +12,7 @@
 
 #define ARG (argc > 1 ? (argc--, *(++argv)): nil)
 #define OPTS(body) \
-	setprogname(&progname, *argv);\
+	_setprogname(&progname, *argv);\
 	argc--;\
 	argv++;\
 	while (argc > 0) {\
@@ -53,8 +53,8 @@ void	*emalloc(uint);
 void	*erealloc(void *, uint);
 long 	 estrtol(const char *nptr, int base);
 
-void setprogname(char **, char *);
+void _setprogname(char *);
 
-extern char *progname;
+extern char *_progname;
 
 #endif
